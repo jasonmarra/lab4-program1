@@ -10,9 +10,11 @@ public class MusicOrganizer
 {
     // An ArrayList for storing the file names of music files.
     private ArrayList<String> files;
+    private ArrayList<String> trackList;
     // A player for the music files.
     private MusicPlayer player;
-        
+    private MusicPlayer musicPlayer;
+      
     /**
      * Create a MusicOrganizer
      */
@@ -31,6 +33,15 @@ public class MusicOrganizer
         files.add(filename);
     }
     
+    public void listWithIndex()
+    {
+    int position = 0;
+    for(String filename : files) {
+        System.out.println(position + ": " + filename);
+        position++;
+    }
+    }
+
     /**
      * Return the number of files in the collection.
      * @return The number of files in the collection.
@@ -131,4 +142,40 @@ public class MusicOrganizer
         }
         return valid;
     }
+    
+    public void listMatching(String searchString)
+    
+    {
+      boolean foundMatch = false;
+      for (String filename : files) {
+        if (filename.contains(searchString)) {
+            System.out.println(filename);
+            foundMatch = true;
+        }
+      }
+      if (!foundMatch) 
+      {
+        System.out.println("No files matched the search string: " + searchString);
+      }
+    }
+    
+    public void playArtistTracks(String searchArtist)
+     {
+    boolean found = false;
+    for (String filename: files) {
+        if (filename.contains(searchArtist)) 
+        {
+            //A match
+            System.out.println("Playing Lisa Album");
+            player.playSample("Studio Lisa-Avant Guardian.mp3");
+            player.playSample("Studio Lisa-The Falcon.mp3");
+            player.playSample("Lisa Davies-Livid.mp3");
+            player.playSample("Lisa Davies-Maverick.mp3");
+        }
+    }
+    if (!found) {
+        System.out.println("No tracks found!");
+    }
+    }
+
 }
